@@ -11,7 +11,7 @@
 4. Then, send the file like this:
 
    ```python
-   sendingSock.sendall(data)
+   socketock.sendall(data)
    ```
 
 5. The graphing microservice will then create a pdf of a graph of the data you sent it, and send that pdf back as a byte stream.
@@ -21,16 +21,16 @@
    Get the size of the pdf we'll be recieving:
 
    ```python
-   size = int.from_bytes(receive_size(sock, 8), byteorder='big')
+   size = int.from_bytes(receive_size(socket, 8), byteorder='big')
    ```
 
    Recieve that many bytes from the socket:
 
    ```python
-   pdf_bytes = receive_size(sock, size)
+   pdf_bytes = receive_size(socket, size)
    ```
 
-   Open a pdf file with a specified filename for writing:
+   Open a pdf file with a specified filename for writing (filename can be whatever you want):
 
    ```python
    pdf_file = open(filename, "wb")
@@ -43,7 +43,7 @@
    pdf_file.truncate()
    ```
 
-   Write the bytes into the file:
+   Write the bytes recieved into the file:
 
    ```python
    pdf_file.write(pdf_bytes)
@@ -78,3 +78,8 @@
 - Only supports graphs with a single line.
 - You must implement writing to a pdf yourself.
 - The microservice can only handle one process at a time.
+
+
+## UML Sequence Diagram:
+
+![UML Sequence Diagram](image.png)
