@@ -21,7 +21,7 @@ def graphxy(data):
     plt.scatter(x, y)
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.title('My Graph')
+    plt.title('Graph')
     buf = io.BytesIO()
     plt.savefig(buf, format='pdf')
     plt.clf()
