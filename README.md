@@ -1,28 +1,61 @@
 ## How Does the Microservice Work?
 
-1. You must first have a CSV file in the format x, y\nx, y\n etc.
-2. Then, call the microservice by connecting a socket to it at port 54338
+1. You must first have a CSV file in the format x, y\nx, y\n etc.  
+2. Then, call the microservice by connecting a socket to it at port 54338  
 3. Then, send the size of the csv file you'll be sending with:
-`socket.sendall(len(data).to_bytes(8,byteorder='big'))`
+
+   ```python
+   socket.sendall(len(data).to_bytes(8, byteorder='big'))
+   ```
+
 4. Then, send the file like this:
-`sendingSock.sendall(data)`
-5. The graphing microservice will then create a pdf of a graph of the data you sent it, and send that
-pdf back as a byte streeam.
+
+   ```python
+   sendingSock.sendall(data)
+   ```
+
+5. The graphing microservice will then create a pdf of a graph of the data you sent it, and send that pdf back as a byte stream.
+
 6. To recieve the data call like this:
-get the size of the pdf we'll be recieving
-`size = int.from_bytes(receive_size(sock, 8), byteorder='big')`
-recieve that many bytes from the socket
-`pdf_bytes = receive_size(sock, size)`
-open a pdf file with a specified filename for writing
-`pdf_file = open(filename, "wb")`
-seek to zero and truncate the file
-`pdf_file.seek(0)`
-`pdf_file.truncate()`
-write the bytes into the file
-`pdf_file.write(pdf_bytes)`
-close the file (you're done)
-`pdf_file.close()`
-recieve_size() should be a function defined to recieve a certain number of bytes of data from a socket.
+
+   Get the size of the pdf we'll be recieving:
+
+   ```python
+   size = int.from_bytes(receive_size(sock, 8), byteorder='big')
+   ```
+
+   Recieve that many bytes from the socket:
+
+   ```python
+   pdf_bytes = receive_size(sock, size)
+   ```
+
+   Open a pdf file with a specified filename for writing:
+
+   ```python
+   pdf_file = open(filename, "wb")
+   ```
+
+   Seek to zero and truncate the file:
+
+   ```python
+   pdf_file.seek(0)
+   pdf_file.truncate()
+   ```
+
+   Write the bytes into the file:
+
+   ```python
+   pdf_file.write(pdf_bytes)
+   ```
+
+   Close the file (you're done):
+
+   ```python
+   pdf_file.close()
+   ```
+
+`receive_size()` should be a function defined to recieve a certain number of bytes of data from a socket.
 
 
 
